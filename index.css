@@ -1,12 +1,21 @@
-body{
-	padding-left: 80px;
+.container{
+	position: relative;
 }
-.row{
-  
+#btmnav{
+  background-color: #333;
+  position: fixed;
+  bottom :0;
+  width: 100%;
+  height: fit-content;
+    
+}
+#grid{
+	left: 0;
 }
 .cell{
 	 
-	background-color: #b8d0d4;
+	background-color: #FFFF99;
+ 
 }
 .visitedcell{
  
@@ -22,8 +31,16 @@ body{
 }
 .destinationcell{
  
-	background-color: #ffb300;
+	background-color: #8B0000;
 }
 .obstacle{
 	background-color: #000000;
+}
+#no_path{
+	width: 400px;
+	height: 300px;
+	font-size: 36px;
+	font-family: "monospace";
+	color: #A52A2A;
+	z-index: 9;
 }
