@@ -1,16 +1,31 @@
 var shortest_path = [];
-function bfs(anim){
+var c_delay;
+ var dist  ;
+ var order_of_traversal;
+ function sleep(milisec) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('')
+    }, milisec);
+  })
+}
+ function bfs(anim){
+    c_delay =0; 
     var q = new Queue();
     var parent= [];
     var visited =[];
-    var dist = [];
+    dist =[];
+     order_of_traversal=[];
     for(let i=0; i<rows; ++i){
         visited[i] = [];
         parent[i]=[];
+        dist[i]=[];
         for(let j =0; j<cols; ++j){
             visited[i][j] = false;
         }
     }
+    
+    dist[starting_cell_coord[0]][starting_cell_coord[1]] = 0;
     q.pushf(starting_cell_coord);
     if(q.isEmpty) console.log("empty");
     var p =0;
@@ -30,6 +45,8 @@ function bfs(anim){
                 q.pushf([i-1,j]);
                 visited[i-1][j] = true;
                 parent[i-1][j] = [i,j];
+                dist[i-1][j] = dist[i][j]+1;
+                order_of_traversal.push([i-1,j]);
                 
             }
             
@@ -41,6 +58,8 @@ function bfs(anim){
               q.pushf([i,j-1]);
               visited[i][j-1] = true;
               parent[i][j-1] = [i,j];
+              dist[i][j-1] = dist[i][j]+1;
+              order_of_traversal.push([i,j-1]);
             }
         }
         if(i<rows-1){
@@ -49,6 +68,8 @@ function bfs(anim){
                 q.pushf([i+1,j]);
                 visited[i+1][j] =true;
                 parent[i+1][j] = [i,j];
+                dist[i+1][j] = dist[i][j]+1;
+                order_of_traversal.push([i+1,j]);
                       
             }
     
@@ -59,6 +80,8 @@ function bfs(anim){
                 q.pushf([i,j+1]);
                 visited[i][j+1] =true;
                 parent[i][j+1] = [i,j];
+                dist[i][j+1] = dist[i][j]+1;
+                order_of_traversal.push([i,j+1]);
                         
             }
         }
@@ -73,21 +96,45 @@ function bfs(anim){
 
         shortest_path.unshift([i[0],i[1]]);
     }
-    var path_length = shortest_path.length;
-    //console.log("shortest_path ki length = " + shortest_path.length+ " "+shortest_path[path_length-1][0]+", "+shortest_path[path_length-1][1]);
-    for(var i=0; i<shortest_path.length-1; ++i){
-          if(anim)
-          animate(shortest_path[i][0],shortest_path[i][1], i);
-          else{
-              cells[shortest_path[i][0]][shortest_path[i][1]].className = "pathcell";
-          }
      
-    }
+     
+    
+    var path_length = shortest_path.length;
+    //animate_visited(anim);
+    //console.log("shortest_path ki length = " + shortest_path.length+ " "+shortest_path[path_length-1][0]+", "+shortest_path[path_length-1][1]);
+    
+    animate_path(anim);
         
 }
+async function animate_visited(anim){
+    var pre =0;
+    for(var pair of order_of_traversal){
 
-function animate(r, c, i){
-    setTimeout(() => {
-       cells[r][c].className = "pathcell";
-      }, 50 * i);
+        console.log("ghoda");
+        if(anim){
+            if(dist[pair[0]][pair[1]]-pre > 0)
+            {await sleep(10);
+                        c_delay=c_delay+ 10;}
+
+        }
+        if(pair[0]!=destination_cell_coord[0] || pair[1]!=destination_cell_coord[1])
+        cells[pair[0]][pair[1]].style.backgroundColor = "#87f5ff";
+        pre = dist[pair[0]][pair[1]];
+        
+
+    }
+}
+async function animate_path(anim){
+      
+      for(var i=0; i<shortest_path.length-1; ++i){
+          if(anim)
+          {
+             await sleep(10);
+             
+          }
+            
+        cells[shortest_path[i][0]][shortest_path[i][1]].className = "pathcell";
+           
+     
+    }
 }
