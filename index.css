@@ -1,24 +1,29 @@
 body{
-	padding: 10px;
-	padding-left: 100px;
+	padding-left: 80px;
 }
 .row{
- 
-  margin-bottom: .8px;
+  
 }
 .cell{
-	margin-right: .8px;
+	 
 	background-color: #b8d0d4;
 }
 .visitedcell{
-	margin-right: .8px;
+ 
 	background-color: #00b3ff;
 }
 .pathcell{
-	margin-right: .8px;
+ 
 	background-color: #26ff12;
 }
 .startingcell{
-  margin-right: .8px;
+ 
 	background-color: #ffb300;
+}
+.destinationcell{
+ 
+	background-color: #ffb300;
+}
+.obstacle{
+	background-color: #000000;
 }
