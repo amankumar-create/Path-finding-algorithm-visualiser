@@ -58,6 +58,7 @@ function listen_events(i,j){
       cells[i][j].addEventListener("mouseover", function (){
                 
                 if(starting_cell_selected){ 
+                   erase_visited();
                    erase_path();
                   
                    if(cells[i][j].className=="cell"){
@@ -72,6 +73,7 @@ function listen_events(i,j){
                    
                }
                else if(destination_cell_selected){ 
+                   erase_visited();
                    erase_path();
                    if(cells[i][j].className=="cell"){
                    destination_cell[0].className = "cell";
@@ -89,7 +91,9 @@ function listen_events(i,j){
                         if(cells[i][j].className!=="startingcell" && cells[i][j].className!=="destinationcell"){
                             cells[i][j].style.backgroundColor= "#000000";
                             if(cells[i][j].className == 'pathcell'){
+                              erase_visited();
                               erase_path();
+                              
                               bfs(false);
                             }
                         }
@@ -126,10 +130,20 @@ function listen_events(i,j){
 }
  
 findBtn.addEventListener("click", function(){
+      erase_visited();
   erase_path();  
   bfs(true);
 });
+function erase_visited(){
+     
+      for(var i=0; i<order_of_traversal.length-1; ++i){
 
+          
+                  cells[order_of_traversal[i][0]][order_of_traversal[i][1]].className = "cell";
+     
+      }
+      order_of_traversal = []
+}
 function erase_path(){
       var pathcells = document.getElementsByClassName("pathcell");
       for(var i=0; i<shortest_path.length-1; ++i){

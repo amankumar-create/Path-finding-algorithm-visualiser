@@ -19,7 +19,7 @@
 }
 .visitedcell{
  
-	background-color: #00b3ff;
+	background-color: #87f5ff;
 }
 .pathcell{
  
@@ -44,3 +44,4 @@
 	color: #A52A2A;
 	z-index: 9;
 }
+ 

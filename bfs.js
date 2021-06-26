@@ -1,7 +1,7 @@
 var shortest_path = [];
 var c_delay;
- var dist  ;
- var order_of_traversal;
+ var dist =[];
+ var order_of_traversal = [];
  function sleep(milisec) {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -14,8 +14,8 @@ var c_delay;
     var q = new Queue();
     var parent= [];
     var visited =[];
-    dist =[];
-     order_of_traversal=[];
+    dist = [];
+    order_of_traversal = [];
     for(let i=0; i<rows; ++i){
         visited[i] = [];
         parent[i]=[];
@@ -27,7 +27,7 @@ var c_delay;
     
     dist[starting_cell_coord[0]][starting_cell_coord[1]] = 0;
     q.pushf(starting_cell_coord);
-    if(q.isEmpty) console.log("empty");
+     
     var p =0;
     visited[starting_cell_coord[0]][starting_cell_coord[1]] =true;
     while(!q.isEmpty() && !visited[destination_cell_coord[0]][destination_cell_coord[1]]){
@@ -93,36 +93,37 @@ var c_delay;
     }
     for(var i = destination_cell_coord; !(i[0]==starting_cell_coord[0] && i[1]==starting_cell_coord[1]) ; i=parent[i[0]][i[1]]){
         //console.log("i0= "+i[0]+", i1= "+i[1]);
-
+        
         shortest_path.unshift([i[0],i[1]]);
     }
      
      
     
     var path_length = shortest_path.length;
-    //animate_visited(anim);
+    animate_visited(anim);
     //console.log("shortest_path ki length = " + shortest_path.length+ " "+shortest_path[path_length-1][0]+", "+shortest_path[path_length-1][1]);
     
-    animate_path(anim);
         
 }
 async function animate_visited(anim){
     var pre =0;
     for(var pair of order_of_traversal){
 
-        console.log("ghoda");
+ 
         if(anim){
             if(dist[pair[0]][pair[1]]-pre > 0)
             {await sleep(10);
-                        c_delay=c_delay+ 10;}
+                        }
 
         }
-        if(pair[0]!=destination_cell_coord[0] || pair[1]!=destination_cell_coord[1])
-        cells[pair[0]][pair[1]].style.backgroundColor = "#87f5ff";
-        pre = dist[pair[0]][pair[1]];
+         if(pair[0]!=destination_cell_coord[0] || pair[1]!=destination_cell_coord[1])
+         cells[pair[0]][pair[1]].className= "visitedcell";
+         pre = dist[pair[0]][pair[1]];
         
 
     }
+     animate_path(anim);
+
 }
 async function animate_path(anim){
       
@@ -130,11 +131,11 @@ async function animate_path(anim){
           if(anim)
           {
              await sleep(10);
-             
           }
-            
-        cells[shortest_path[i][0]][shortest_path[i][1]].className = "pathcell";
+        //console.log("path");
+        cells[shortest_path[i][0]][shortest_path[i][1]].className= "pathcell";
            
      
     }
+    cells[destination_cell_coord[0]][destination_cell_coord[1]].className = "destinationcell";
 }
