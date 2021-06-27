@@ -1,6 +1,6 @@
 var grid = document.getElementById("grid");
-var rows = (screen.height-200)/10;
-var cols= (screen.width-20)/10;
+var rows = (screen.height-100)/10;
+var cols= (screen.width )/10;
 rows = Math.ceil(rows);
 cols = Math.ceil(cols);
 var draw_enabled =false;
@@ -58,14 +58,14 @@ function listen_events(i,j){
       cells[i][j].addEventListener("mouseover", function (){
                 
                 if(starting_cell_selected){ 
-                   erase_visited();
-                   erase_path();
-                  
-                   if(cells[i][j].className=="cell"){
+  
+                   if(cells[i][j].className!="destinationcell"){
+                        erase_visited();
+                        erase_path();
                         starting_cell[0].className = "cell";
                         cells[i][j].className = "startingcell";
                         starting_cell_coord = [i,j];
-                  
+                   
                         bfs(false);
                   }
                    //console.log("current startingcell = "+i+" "+j);
@@ -75,8 +75,10 @@ function listen_events(i,j){
                else if(destination_cell_selected){ 
                    erase_visited();
                    erase_path();
+                   cells[destination_cell_coord[0]][destination_cell_coord[1]].className = "cell";
                    if(cells[i][j].className=="cell"){
-                   destination_cell[0].className = "cell";
+                   
+                   //console.log(cells[i][j].className);
                    cells[i][j].className = "destinationcell";
                    destination_cell_coord = [i,j];
                    
@@ -92,9 +94,11 @@ function listen_events(i,j){
                             cells[i][j].style.backgroundColor= "#000000";
                             if(cells[i][j].className == 'pathcell'){
                               erase_visited();
+                              //console.log("visited_erased");
                               erase_path();
-                              
+                              //console.log("path erased");
                               bfs(false);
+                              //console.log("bfs  ");
                             }
                         }
                }  
@@ -131,15 +135,15 @@ function listen_events(i,j){
  
 findBtn.addEventListener("click", function(){
       erase_visited();
-  erase_path();  
-  bfs(true);
+      erase_path();  
+      bfs(true);
 });
 function erase_visited(){
      
       for(var i=0; i<order_of_traversal.length-1; ++i){
 
           
-                  cells[order_of_traversal[i][0]][order_of_traversal[i][1]].className = "cell";
+            cells[order_of_traversal[i][0]][order_of_traversal[i][1]].className = "cell";
      
       }
       order_of_traversal = []

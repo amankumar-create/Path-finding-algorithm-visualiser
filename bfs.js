@@ -28,7 +28,7 @@ var c_delay;
     dist[starting_cell_coord[0]][starting_cell_coord[1]] = 0;
     q.pushf(starting_cell_coord);
      
-    var p =0;
+  
     visited[starting_cell_coord[0]][starting_cell_coord[1]] =true;
     while(!q.isEmpty() && !visited[destination_cell_coord[0]][destination_cell_coord[1]]){
      
@@ -85,7 +85,7 @@ var c_delay;
                         
             }
         }
-        ++p;
+       
     
     }
     if(!visited[destination_cell_coord[0]][destination_cell_coord[1]]){
@@ -116,8 +116,11 @@ async function animate_visited(anim){
                         }
 
         }
-         if(pair[0]!=destination_cell_coord[0] || pair[1]!=destination_cell_coord[1])
-         cells[pair[0]][pair[1]].className= "visitedcell";
+         if(dist[pair[0]][pair[1]]<dist[destination_cell_coord[0]][destination_cell_coord[1]]-1)
+         {cells[pair[0]][pair[1]].className= "visitedcell";}
+         else if(dist[pair[0]][pair[1]]==dist[destination_cell_coord[0]][destination_cell_coord[1]]-1){
+            cells[pair[0]][pair[1]].className= "boundaryvisitedcell";
+         }
          pre = dist[pair[0]][pair[1]];
         
 
