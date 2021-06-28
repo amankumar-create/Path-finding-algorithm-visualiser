@@ -7,7 +7,7 @@ var draw_enabled =false;
 var starting_cell_selected = false;
 var destination_cell_selected = false;
 var starting_cell_coord = [5,5];
-var destination_cell_coord = [50,20];
+var destination_cell_coord = [30,30];
 
 
 var findBtn = document.getElementById("find");
@@ -37,7 +37,7 @@ for(let i=0 ; i<rows; ++i){
 }
 
 cells[5][5].className = "startingcell";
-cells[50][20].className = "destinationcell";
+cells[30][30].className = "destinationcell";
 
  
 var destination_cell = document.getElementsByClassName("destinationcell");
@@ -56,42 +56,49 @@ grid.addEventListener("mouseup", function(){
 
 function listen_events(i,j){
       cells[i][j].addEventListener("mouseover", function (){
-                
-                if(starting_cell_selected){ 
-  
-                   if(cells[i][j].className!="destinationcell"){
-                        erase_visited();
-                        erase_path();
-                        starting_cell[0].className = "cell";
-                        cells[i][j].className = "startingcell";
-                        starting_cell_coord = [i,j];
+             
+            if(!starting_cell_selected && !destination_cell_selected){
+                  grid.style.cursor ="cell";
+            }
+            if(cells[i][j].className=="startingcell"||cells.className=="destinationcell"){
+                  cells[i][j].style.cursor = "grab";
+            }
+            if(starting_cell_selected){ 
+                   cells[i][j].style.cursor = "grabbing";
+                  if(cells[i][j].className!="destinationcell"){
+                       
+                       erase_visited();
+                       erase_path();
+                       starting_cell[0].className = "cell";
+                       cells[i][j].className = "startingcell";
+                       starting_cell_coord = [i,j];
+                  
+                       bfs(false);
+                 }
+             //console.log("current startingcell = "+i+" "+j);
+             
                    
-                        bfs(false);
-                  }
-                   //console.log("current startingcell = "+i+" "+j);
-                   
-                   
-               }
-               else if(destination_cell_selected){ 
+            }
+            else if(destination_cell_selected){ 
+                  cells[i][j].style.cursor = "grabbing";
+                  cells[destination_cell_coord[0]][destination_cell_coord[1]].className = "cell";
+                  if(cells[i][j].id!="obstacle"){
                    erase_visited();
-                   erase_path();
-                   cells[destination_cell_coord[0]][destination_cell_coord[1]].className = "cell";
-                   if(cells[i][j].className=="cell"){
-                   
-                   //console.log(cells[i][j].className);
-                   cells[i][j].className = "destinationcell";
-                   destination_cell_coord = [i,j];
-                   
-                   bfs(false);
-                   }
-                   //console.log("current destinationcell = "+i+" "+j);
-                   
-                   
+                  erase_path();
+                  //console.log(cells[i][j].className);
+                  cells[i][j].className = "destinationcell";
+                  destination_cell_coord = [i,j];
+                  
+                  bfs(false);
+                  }
+                  //console.log("current destinationcell = "+i+" "+j);
+                  
                }
                else{ 
+             
                   if(draw_enabled)
                         if(cells[i][j].className!=="startingcell" && cells[i][j].className!=="destinationcell"){
-                            cells[i][j].style.backgroundColor= "#000000";
+                            cells[i][j].id ="obstacle";
                             if(cells[i][j].className == 'pathcell'){
                               erase_visited();
                               //console.log("visited_erased");
@@ -108,11 +115,11 @@ function listen_events(i,j){
             cells[i][j].addEventListener("mousedown",function(){  
                if(cells[i][j]==starting_cell[0]){
                   starting_cell_selected =true;
- 
+                  grid.style.cursor = "grabbing";
                }
                else if(cells[i][j]==destination_cell[0]){
                      destination_cell_selected =true;
-                      
+                      grid.style.cursor = "grabbing";
                }
               
             });
@@ -121,12 +128,14 @@ function listen_events(i,j){
                   starting_cell_selected =false;
                   cells[i][j].className = "startingcell";
                   starting_cell_coord = [i,j];
+                  grid.style.cursor = "grab";
                     
                }
                if(cells[i][j]==destination_cell[0]){
                   destination_cell_selected =false;
                   cells[i][j].className = "destinationcell";
                   destination_cell_coord = [i,j];
+                   grid.style.cursor = "grab";
 
                }
             });
@@ -136,7 +145,8 @@ function listen_events(i,j){
 findBtn.addEventListener("click", function(){
       erase_visited();
       erase_path();  
-      bfs(true);
+      //bfs(true);
+      dijkstra();
 });
 function erase_visited(){
      
@@ -160,3 +170,18 @@ function erase_path(){
  
 var cell_color=cells[0][0].style.backgroundColor;
  
+var dropBtn = document.getElementById('dropBtn');
+var algo1 = document.getElementById('a1');
+var algo2 = document.getElementById('a2');
+
+//choosing algorithm -----------------------------------------------------------------------
+var algo = 1;
+algo1.addEventListener("click", function () {
+    algo = 1;
+    dropBtn.innerHTML = "Breadth First Search";
+
+});
+algo2.addEventListener("click", function () {
+    algo = 2;
+    dropBtn.innerHTML = "Dijkstra's Algorithm";
+});

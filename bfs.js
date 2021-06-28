@@ -40,7 +40,7 @@ var c_delay;
         q.popb();
         
         if(i>0){
-            if(!(visited[i-1][j]) &&  (cells[i-1][j].style.backgroundColor==cell_color)){
+            if(!(visited[i-1][j]) &&  (cells[i-1][j].id!="obstacle")){
                 // console.log("bgcolor = "+cells[i-1][j].style.backgroundColor);
                 q.pushf([i-1,j]);
                 visited[i-1][j] = true;
@@ -52,7 +52,7 @@ var c_delay;
             
         }
         if(j>0){
-            if(!(visited[i][j-1]) &&  (cells[i][j-1].style.backgroundColor==cell_color))
+            if(!(visited[i][j-1]) &&  (cells[i][j-1].id!="obstacle"))
             { 
               //console.log("bgcolor = "+cells[i][j-1].style.backgroundColor);
               q.pushf([i,j-1]);
@@ -63,7 +63,7 @@ var c_delay;
             }
         }
         if(i<rows-1){
-            if(!(visited[i+1][j]) &&  (cells[i+1][j].style.backgroundColor==cell_color)){
+            if(!(visited[i+1][j]) &&  (cells[i+1][j].id!="obstacle")){
                 // console.log("bgcolor = "+cells[i+1][j].style.backgroundColor);
                 q.pushf([i+1,j]);
                 visited[i+1][j] =true;
@@ -75,7 +75,7 @@ var c_delay;
     
         }
         if(j<cols-1){
-            if(!(visited[i][j+1]) && (cells[i][j+1].style.backgroundColor==cell_color)){
+            if(!(visited[i][j+1]) && (cells[i][j+1].id!="obstacle")){
                 // console.log("bgcolor = "+cells[i][j+1].style.backgroundColor);
                 q.pushf([i,j+1]);
                 visited[i][j+1] =true;
@@ -141,4 +141,5 @@ async function animate_path(anim){
      
     }
     cells[destination_cell_coord[0]][destination_cell_coord[1]].className = "destinationcell";
+ 
 }
