@@ -11,6 +11,7 @@ var destination_cell_coord = [30,30];
 
 
 var findBtn = document.getElementById("find");
+var createMaze = document.getElementById("create_maze");
 
 var cells = [];
 
@@ -28,9 +29,7 @@ for(let i=0 ; i<rows; ++i){
             row.appendChild(cell);
             cells[i][j] = cell;
             listen_events(i,j);
-
-
-            
+   
       }
       grid.appendChild(row);
 
@@ -98,7 +97,10 @@ function listen_events(i,j){
              
                   if(draw_enabled)
                         if(cells[i][j].className!=="startingcell" && cells[i][j].className!=="destinationcell"){
-                            cells[i][j].id ="obstacle";
+                            if(!maze_drawn)cells[i][j].id ="obstacle";
+                            else{
+                              cells[i][j].removeAttribute("id");
+                            }
                             if(cells[i][j].className == 'pathcell'){
                               erase_visited();
                               //console.log("visited_erased");
@@ -141,12 +143,39 @@ function listen_events(i,j){
             });
             
 }
- 
+var maze_drawn = false;
+createMaze.addEventListener("click", function(){
+      erase_visited();
+      erase_path(); 
+      if(!maze_drawn){
+           create_maze();
+           maze_drawn = true;
+           createMaze.innerHTML = "Erase Maze";            
+      }
+      else{
+            erase_maze();
+            maze_drawn=false;
+           createMaze.innerHTML = "Create Maze";            
+
+      }
+      cells[starting_cell_coord[0]][starting_cell_coord[1]].className = "startingcell";
+
+});
+
 findBtn.addEventListener("click", function(){
       erase_visited();
       erase_path();  
-      //bfs(true);
-      dijkstra();
+     
+       
+      cells[starting_cell_coord[0]][starting_cell_coord[1]].removeAttribute("id");
+      cells[starting_cell_coord[0]][starting_cell_coord[1]].className = "startingcell";
+      if(algo==1){
+            bfs(true);
+      }
+      else{
+            dijkstra();
+      }
+  
 });
 function erase_visited(){
      

@@ -61,9 +61,7 @@
 	 width: 10px;
 	 height: 10px;
 	background-color: #000000;
-	 animation-name: obsdraw;
-  animation-duration: 0.2s;
-  border-radius: 0px;
+	 
 }
 @keyframes example {
   from {border-radius: 6px; background-color: #6666ff;}

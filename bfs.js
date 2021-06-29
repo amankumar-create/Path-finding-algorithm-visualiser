@@ -112,8 +112,9 @@ async function animate_visited(anim){
  
         if(anim){
             if(dist[pair[0]][pair[1]]-pre > 0)
-            {await sleep(10);
-                        }
+            {
+                await sleep(10);
+            }
 
         }
          if(dist[pair[0]][pair[1]]<dist[destination_cell_coord[0]][destination_cell_coord[1]]-1)
@@ -125,16 +126,16 @@ async function animate_visited(anim){
         
 
     }
-     animate_path(anim);
+    animate_path(anim);
 
 }
 async function animate_path(anim){
       
-      for(var i=0; i<shortest_path.length-1; ++i){
-          if(anim)
-          {
-             await sleep(10);
-          }
+    for(var i=0; i<shortest_path.length-1; ++i){
+        if(anim)
+        {
+           await sleep(10);
+        }
         //console.log("path");
         cells[shortest_path[i][0]][shortest_path[i][1]].className= "pathcell";
            

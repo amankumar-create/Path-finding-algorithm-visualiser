@@ -23,7 +23,9 @@
   
 	<div id="btmnav" class="navbar">
         <button type="button" class="btn btn-primary" id="find">find path</button>
-         <div class="dropup">
+        <button type="button" class="btn btn-primary" id="create_maze">Create Maze</button>
+      
+        <div class="dropup">
             <button id="dropBtn" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose
                 Algorithm
                 <span class="caret"></span></button>
@@ -32,8 +34,7 @@
                     onmouseout="document.getElementById('a1').style.backgroundColor= 'white'">
                     Breadth first search</p>
                 <p id="a2" onmouseover="document.getElementById('a2').style.backgroundColor= 'rgb(133, 133, 138'"
-                    onmouseout="document.getElementById('a2').style.backgroundColor= 'white'">Dijkstra's Algorithm</p>
-               
+                    onmouseout="document.getElementById('a2').style.backgroundColor= 'white'">Dijkstra's Algorithm</p>    
             </ul>
         </div>
     </div>
@@ -41,6 +42,8 @@
 	<script src="queue_ds.js"></script>
 	<script src="bfs.js"></script>
     <script src="dijkstras_algo.js"></script>
+    <script src="maze.js"></script>
+
 
 </body>
 
