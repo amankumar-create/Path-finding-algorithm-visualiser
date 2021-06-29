@@ -1,27 +1,29 @@
-var shortest_path = [];
-var c_delay;
- var dist =[];
- var order_of_traversal = [];
- function sleep(milisec) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve('')
-    }, milisec);
-  })
+var shortest_path = [];  //stores the shortest path 
+ 
+var dist =[];
+var order_of_traversal = []; //it stores the coordinates of cells in non decreasing order of their distance from starting cell which is later used in visualising the level order visiting of cells
+function sleep(milisec) {
+ return new Promise(resolve => {
+   setTimeout(() => {
+     resolve('')
+   }, milisec);
+ });
 }
- function bfs(anim){
-    c_delay =0; 
-    var q = new Queue();
-    var parent= [];
-    var visited =[];
-    dist = [];
+function bfs(anim){
+    findBtn.disabled = true;   
+    createMaze.disabled = true;
+ 
+    var q = new Queue();           // creating a queue  
+    var parent= [];                // stores the coordinates of parent cell of a cell 
+    var visited =[];               //stores if the cell at some coordinate is visited or not
+    dist = []; 
     order_of_traversal = [];
     for(let i=0; i<rows; ++i){
         visited[i] = [];
         parent[i]=[];
         dist[i]=[];
         for(let j =0; j<cols; ++j){
-            visited[i][j] = false;
+            visited[i][j] = false;       // initially all the cells are unvisited 
         }
     }
     
@@ -37,8 +39,8 @@ var c_delay;
         var i=curr[0];
         var j = curr[1];
         
-        q.popb();
-        
+        q.popb(); // popping the front element out of queue
+        //pushing the unvisited neighbours of current cell to queue if it is not a obstacle and setting the current cell at the parent of that cell
         if(i>0){
             if(!(visited[i-1][j]) &&  (cells[i-1][j].id!="obstacle")){
                 // console.log("bgcolor = "+cells[i-1][j].style.backgroundColor);
@@ -89,21 +91,15 @@ var c_delay;
     
     }
     if(!visited[destination_cell_coord[0]][destination_cell_coord[1]]){
-        return;
+        return;       // if destination cell is never visited return as there is no possible path to destination
     }
     for(var i = destination_cell_coord; !(i[0]==starting_cell_coord[0] && i[1]==starting_cell_coord[1]) ; i=parent[i[0]][i[1]]){
         //console.log("i0= "+i[0]+", i1= "+i[1]);
-        
-        shortest_path.unshift([i[0],i[1]]);
+        shortest_path.unshift([i[0],i[1]]); // generating the path array by backtracking 
     }
      
-     
+    animate_visited(anim); //animation part
     
-    var path_length = shortest_path.length;
-    animate_visited(anim);
-    //console.log("shortest_path ki length = " + shortest_path.length+ " "+shortest_path[path_length-1][0]+", "+shortest_path[path_length-1][1]);
-    
-        
 }
 async function animate_visited(anim){
     var pre =0;
@@ -142,5 +138,7 @@ async function animate_path(anim){
      
     }
     cells[destination_cell_coord[0]][destination_cell_coord[1]].className = "destinationcell";
+     findBtn.disabled =false;
+    createMaze.disabled =false;
  
 }
