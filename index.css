@@ -11,23 +11,23 @@
 	cursor: cell;
 }
 .cell{
-	width: 10px;
-	height: 10px;
+	width: 15px;
+	height: 15px;
 	background-color:  #ffffff;
   
 }
 .visitedcell{
-  width: 10px;
-	height: 10px;
+  width: 15px;
+	height: 15px;
 		background-color: #4fffe8;
 	animation-name: example;
-  animation-duration: 0.1s;
+  animation-duration: 0.2s;
   border-radius: 0px;
 
 }
 .boundaryvisitedcell{
-  width: 10px;
-	 height: 10px;
+  width: 15px;
+	 height: 15px;
 	background-color: #87f5ff;
 	
 	animation-name: example;
@@ -36,39 +36,39 @@
 
 }
 .pathcell{
-  width: 10px;
-	 height: 10px;
+  width: 15px;
+	 height: 15px;
 	background-color: #fff236;
 	animation-name: example;
   animation-duration: 0.05s;
   border-radius: 0px;
 }
 .startingcell{
-  width: 10px;
-	 height: 10px;
+  width: 15px;
+	height: 15px;
 	background-color: #ffb300;
  
 	 
 }
 .destinationcell{
-  width: 10px;
-	 height: 10px;
+  width: 15px;
+	 height: 15px;
 	background-color: #8B0000;
 	border-radius: 6px;
  
 }
 #obstacle{
-	 width: 10px;
-	 height: 10px;
+	 width: 15px;
+	 height: 15px;
 	background-color: #000000;
 	 
 }
 @keyframes example {
-  from {border-radius: 6px; background-color: #6666ff;}
+  from {border-radius: 8px; background-color: #6666ff;}
   to {border-radius: 0px; background-color: #4fffe8;}
 }
 @keyframes obsdraw {
-  from {border-radius:  6px; background-color: 	#ff00ff;}
+  from {border-radius:  8px; background-color: 	#ff00ff;}
   to {border-radius: 0px; background-color: 	#bf00ff;}
 }
 #no_path{

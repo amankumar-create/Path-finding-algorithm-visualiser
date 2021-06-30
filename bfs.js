@@ -5,7 +5,7 @@ var order_of_traversal = []; //it stores the coordinates of cells in non decreas
 function sleep(milisec) {
  return new Promise(resolve => {
    setTimeout(() => {
-     resolve('')
+     resolve('');
    }, milisec);
  });
 }

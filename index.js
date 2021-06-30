@@ -2,15 +2,15 @@ var grid = document.getElementById("grid");
 var findBtn = document.getElementById("find");
 var createMaze = document.getElementById("create_maze");
 
-var rows = (screen.height-100)/10;
-var cols= (screen.width )/10;
+var rows = (screen.height -80)/15;
+var cols= (screen.width )/15;
 rows = Math.ceil(rows);
 cols = Math.ceil(cols);
 var draw_enabled =false;
 var starting_cell_selected = false;
 var destination_cell_selected = false;
 var starting_cell_coord = [5,5];
-var destination_cell_coord = [35,41];
+var destination_cell_coord = [20,20];
 
 var cells = [];
 //populating the area with cells to create a grid of cells
@@ -18,7 +18,7 @@ for(let i=0 ; i<rows; ++i){
       cells[i] = [];
       var row = document.createElement('div');
       row.className = "row";
-      row.style.height = 10 + 'px';
+      row.style.height = 15 + 'px';
       row.style.width = screen.width + 'px';
       for(let j =0 ;j<cols; ++j){
             var cell = document.createElement('div');
@@ -35,7 +35,7 @@ for(let i=0 ; i<rows; ++i){
 
 //default starting and destination cell
 cells[5][5].className = "startingcell";
-cells[35][41].className = "destinationcell";
+cells[20][20].className = "destinationcell";
 
  
 var destination_cell = document.getElementsByClassName("destinationcell");
