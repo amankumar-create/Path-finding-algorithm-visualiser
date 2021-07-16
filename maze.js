@@ -6,11 +6,12 @@ function create_maze(){
     for(let i=0 ; i<rows; ++i){
         is_visited[i] = [];
         for(let j =0 ;j<cols; ++j){
-              cells[i][j].id = "obstacle"; //making whole grid black by making each cell an obstacle
+              cells[i][j].id = "obstacle"; // making whole grid black by making each cell an obstacle
               is_visited[i][j] = false;
         }
     }
-    dfs(starting_cell_coord[0],starting_cell_coord[1]);   
+    dfs(starting_cell_coord[0],starting_cell_coord[1]); 
+    cells[destination_cell_coord[0]][destination_cell_coord[1]].removeAttribute("id"); 
     cells[destination_cell_coord[0]][destination_cell_coord[1]].className = "destinationcell";
 
 }
@@ -66,7 +67,7 @@ function getUnvisitedNbrs(i,j){
 function shuffle(array) {
   var currentIndex = array.length,  randomIndex;
 
-  // While there remain elements to shuffle...
+  //While there remain elements to shuffle...
   while (0 !== currentIndex) {
 
      

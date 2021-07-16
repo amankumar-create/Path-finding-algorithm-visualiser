@@ -19,7 +19,7 @@
 .visitedcell{
   width: 15px;
 	height: 15px;
-		background-color: #4fffe8;
+	background-color: #4fffe8;
 	animation-name: example;
   animation-duration: 0.2s;
   border-radius: 0px;
@@ -31,7 +31,7 @@
 	background-color: #87f5ff;
 	
 	animation-name: example;
-  animation-duration: 0.5s;
+  animation-duration: 0.1s;
   border-radius: 6px;
 
 }
@@ -46,15 +46,17 @@
 .startingcell{
   width: 15px;
 	height: 15px;
-	background-color: #ffb300;
+	background-image: url("start.png");
+	background-size:100% 100%;
  
 	 
 }
 .destinationcell{
   width: 15px;
 	 height: 15px;
-	background-color: #8B0000;
-	border-radius: 6px;
+	background-image: url("end.png");
+	background-size:100% 100%;
+	 
  
 }
 #obstacle{

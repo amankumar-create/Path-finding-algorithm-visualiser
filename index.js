@@ -32,6 +32,7 @@ for(let i=0 ; i<rows; ++i){
       grid.appendChild(row);
 
 }
+ 
 
 //default starting and destination cell
 cells[5][5].className = "startingcell";
@@ -81,7 +82,7 @@ function listen_events(i,j){
             else if(destination_cell_selected){ //if destination cell is selected for being dragged
                   cells[i][j].style.cursor = "grabbing";
                   cells[destination_cell_coord[0]][destination_cell_coord[1]].className = "cell"; //set the class of cell at destination coordinates to normal cell
-                  if(cells[i][j].id!="obstacle"){ 
+                  if(cells[i][j].id!="obstacle" && cells[i][j].className!="startingcell"){ 
                         erase_visited();
                         erase_path();
                         //console.log(cells[i][j].className);
@@ -168,7 +169,7 @@ createMaze.addEventListener("click", function(){
 findBtn.addEventListener("click", function(){
       erase_visited(); //erases currently visited cells if any
       erase_path();   //erases current path if any
-     
+      cells[destination_cell_coord[0]][destination_cell_coord[1]].className = "destinationcell";
        
       if(algo==1){
             bfs(true); //if algorithm 1 was selected breadth first search is triggered
